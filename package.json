@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/danha25/kcals-chat-app#readme",
   "dependencies": {
+    "bulma": "^0.7.4",
     "express": "^4.16.4",
     "jquery": "^3.4.0",
     "mustache": "^3.0.1",

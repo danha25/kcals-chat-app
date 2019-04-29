@@ -16,7 +16,7 @@ socket.on('updateUsers', (users) => {
 
 socket.on('newMessage', (message) => {
     var ol = $('#messages');
-    ol.append(jQuery('<li></li>').text(message.text));
+    ol.append(jQuery('<li></li>').text(message.user + ': ' + message.text));
 });
 
 // Send new message to server

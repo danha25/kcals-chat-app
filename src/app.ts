@@ -19,6 +19,7 @@ class App{
         this.app.use(express.static(publicPath));
         this.app.use('/libs', express.static(__dirname + '/../node_modules/jquery/dist/'));
         this.app.use('/libs', express.static(__dirname + '/../node_modules/mustache/'));
+        this.app.use('/libs', express.static(__dirname + '/../node_modules/bulma/css'));
     }
 }
 
