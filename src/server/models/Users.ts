@@ -9,9 +9,14 @@ export default class Users implements IUsers {
         this.users = new Array();
     }
 
-    public getUser(userId: string): User {
-        return this.users.filter((user:User) => user.id === userId)[0];
+    public getUserById(userId: string): User {
+        return this.users.filter((user: User) => user.id === userId)[0];
     }
+
+    public getUserByName(username: string): User {
+        return this.users.filter((user: User) => user.username === username)[0];
+    }
+
     public getAllUsers(room: string): Array<User> {
         return this.users.filter(u => u.room === room);
     }
@@ -20,8 +25,8 @@ export default class Users implements IUsers {
         return user;
     }
     public removeUser(userId: string): User {
-        const user = this.getUser(userId);
-        if(user) {
+        const user = this.getUserById(userId);
+        if (user) {
             this.users = this.users.filter((u: User) => u.id !== userId);
         }
         return user;

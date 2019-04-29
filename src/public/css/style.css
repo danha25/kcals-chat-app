@@ -11,3 +11,7 @@ html, body {
     color: azure;
     padding: 10px !important;
   }
+
+  .my-highlight {
+    background-color: #1264A3;
+  }

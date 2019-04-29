@@ -4,48 +4,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kcals</title>
+    <title>Join | Kcals</title>
     <link rel="stylesheet" href="/libs/bulma.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-    <div class="container is-fullhd full-height">
-        <div class="columns is-gapless full-height">
-            <div class="column is-one-fifth sidebar">
-                <div style="padding: 40px;">
-                    <h2>Direct Messages</h2>
-                    <ul id="users"></ul>
-                </div>
+    <div class="container">
+        <form action="./chat.html">
+            <div class="form-field">
+                <h3>Join a Chat</h3>
             </div>
-            <div class="column">
-                <div class="columns is-multiline is-full full-height">
-                    <div class="column is-full" style="height:90%">
-                        <ul id="messages">
-                        </ul>
-                    </div>
-                    <div class="column" style="padding: 16px">
-                        <div class="columns is-gapless">
-                            <div class="column is-11">
-                                <input id="message" class="input" type="text" placeholder="Message">
-                            </div>
-                            <div class="column">
-                                <button id="btn-send" class="button" style="width: 100%">Send</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-field">
+                <label for="username">Display name</label>
+                <input type="text" name="username" autofocus />
             </div>
-        </div>
-    </div>
+            <div class="form-field">
+                <label for="room">Room name</label>
+                <input type="text" name="room" />
+            </div>
+            <div class="form-field">
+                <button>Join</button>
+            </div>
+        </form>
     </div>
 
-    <!-- Scripts -->
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/libs/jquery.js"></script>
-    <script src="/libs/mustache.js"></script>
-    <script src="./js/app.js"></script>
 </body>
 
 </html>
