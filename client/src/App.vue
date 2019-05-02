@@ -1,29 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <div class="container is-fullhd">
+      <div class="columns">
+        <div class="column is-2">
+          <ChannelList />
+        </div>
+        <div class="column is-10">
+          <h2>Messages</h2>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import HelloWorld from "./components/HelloWorld.vue";
+import ChannelList from "./components/ChannelList.vue";
 
 @Component({
   components: {
-    HelloWorld
+    HelloWorld,
+    ChannelList
   }
 })
 export default class App extends Vue {}
 </script>
 
 <style>
-#app {
+@import "~bulma/css/bulma.css";
+/* #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
+} */
 </style>
