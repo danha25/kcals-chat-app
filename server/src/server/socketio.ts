@@ -1,10 +1,10 @@
 import * as http from 'http';
 import * as socketIO from 'socket.io'
 
-import User from './models/User';
+import User from 'kcals-common/lib/User';
 import Users from './models/Users';
-import MessageType  from './models/MessageType';
-import Message from './models/Message';
+import MessageType  from 'kcals-common/lib/MessageType';
+import Message from 'kcals-common/lib/Message';
 import Messages from './models/Messages';
 
 // Emit

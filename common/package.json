@@ -1,0 +1,14 @@
+{
+  "name": "kcals-common",
+  "version": "1.0.0",
+  "description": "Common models for kcals application",
+  "main": "index.ts",
+  "scripts": {
+    "build" : "tsc"
+  },
+  "author": "danha",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^3.4.5"
+  }
+}

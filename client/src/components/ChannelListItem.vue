@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import User from '@/models/User';
+import User from '../../node_modules/kcals-common/User';
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component

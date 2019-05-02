@@ -1,5 +1,5 @@
 'use strict'
-import Message from './Message';
+import Message from 'kcals-common/lib/Message';
 
 export default interface IMessages {
     getDirectMessages(from: string, to: string): Array<Message>;

@@ -18,6 +18,10 @@ import { Component, Vue } from "vue-property-decorator";
 import HelloWorld from "./components/HelloWorld.vue";
 import ChannelList from "./components/ChannelList.vue";
 
+import socketIO from 'socket.io-client';
+
+
+
 @Component({
   components: {
     HelloWorld,

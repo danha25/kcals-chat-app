@@ -1,5 +1,5 @@
 'use strict'
-import User from './User';
+import User from 'kcals-common/lib/User';
 
 export default interface IUsers {
     getUserById(userId: string): User;

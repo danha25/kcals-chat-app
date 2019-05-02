@@ -1,7 +1,7 @@
 'use strict'
 
-import MessageType from './MessageType';
-import Message from './Message';
+import MessageType from 'kcals-common/lib/MessageType';
+import Message from 'kcals-common/lib/Message';
 import IMessage from './IMessages';
 
 export default class Messages implements IMessage {

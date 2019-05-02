@@ -1,4 +1,4 @@
-import User from './User';
+import User from 'kcals-common/lib/User';
 import IUsers from './IUsers';
 
 export default class Users implements IUsers {

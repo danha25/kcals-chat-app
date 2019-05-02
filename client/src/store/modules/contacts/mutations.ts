@@ -1,5 +1,5 @@
 import * as types from './mutation-types';
-import User from '@/models/User';
+import User from '../../../../node_modules/kcals-common/User';
 
 const mutations = {
     [types.UPDATE_USER_LIST](state: any, payload: Array<User>) {
