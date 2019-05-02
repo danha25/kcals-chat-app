@@ -1,14 +1,15 @@
 <template>
   <div>
-    <p>{{user}}</p>
+    <p>{{user.username}}</p>
   </div>
 </template>
 
 <script lang="ts">
+import User from '@/models/User';
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class ChannelListItem extends Vue {
-  @Prop() private user!: string;
+  @Prop() private user!: User;
 }
 </script>

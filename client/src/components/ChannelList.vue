@@ -3,12 +3,17 @@
     <h3>Dirrect Messages</h3>
     <!-- here v for frineds -->
     <ChannelListItem user='username'/>
+
+    <div v-for="user in users" :key="user.id">
+        <ChannelListItem :user="user"/>
+      </div>
   </div>
   
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 import ChannelListItem from './ChannelListItem.vue';
 
 @Component({
@@ -16,7 +21,15 @@ import ChannelListItem from './ChannelListItem.vue';
     ChannelListItem
   }
 })
-export default class ChannelList extends Vue {}
+export default class ChannelList extends Vue {
+  created() {
+    this.$store.dispatch("getUserList");
+  } 
+  
+  get users() {
+    return this.$store.getters.users
+  }
+}
 </script>
 
 <style>
