@@ -33,7 +33,7 @@ export default class SocketIOClient {
 
         this.socket.on(EVENT.EVENT_UPDATE_MESSAGES, (messages: Array<Message>) => {
             this.vue.$store.dispatch('updateMessages', messages);
-            console.log(messages);
+            console.log(this.vue.$store.getters.getMessages);
         })
     }
 }

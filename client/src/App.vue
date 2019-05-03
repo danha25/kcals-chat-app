@@ -1,12 +1,15 @@
 <template>
   <div id="app">
     <div class="container is-fullhd">
-      <div class="columns">
+      <div class="columns is-gapless">
         <div class="column is-2">
-          <ChannelList />
+          <ChannelList/>
         </div>
         <div class="column is-10">
-          <h2>Messages</h2>
+          <div class="flex-container">
+            <MessageList class="flex-expand"/>
+            <InputMessage class="flex-fixed"/>
+          </div>
         </div>
       </div>
     </div>
@@ -16,27 +19,35 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import ChannelList from "./components/ChannelList.vue";
-import socketIO from './socket.io/client';
+import MessageList from "./components/MessageList.vue";
+import InputMessage from "./components/InputMessage.vue";
+
+import socketIO from "./socket.io/client";
 
 @Component({
   components: {
-    ChannelList
+    ChannelList,
+    MessageList,
+    InputMessage
   }
 })
 export default class App extends Vue {
-
   socketIO = new socketIO(this);
 }
 </script>
 
 <style>
 @import "~bulma/css/bulma.css";
-/* #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
+.flex-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.flex-expand {
+  flex: auto;
+  overflow-y: scroll;
+}
+.flex-fixed {
+  flex: none;
+}
 </style>

@@ -14,12 +14,6 @@
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import ChannelListItem from "./ChannelListItem.vue";
-import socketIO from 'socket.io-client';
-// emit
-const EVENT_LOGIN: string = 'login';
-
-//listen
-const EVENT_UPDATE_USERS: string = 'updateUsers';
 
 @Component({
   components: {
