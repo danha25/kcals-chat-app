@@ -15,7 +15,6 @@ import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import ChannelListItem from "./ChannelListItem.vue";
 import socketIO from 'socket.io-client';
-import User from '../../node_modules/kcals-common/User';
 // emit
 const EVENT_LOGIN: string = 'login';
 
@@ -28,19 +27,6 @@ const EVENT_UPDATE_USERS: string = 'updateUsers';
   }
 })
 export default class ChannelList extends Vue {
-  created() {
-    const socket = socketIO("http://localhost:3000");
-
-    socket.on("connect", function() {
-      console.log("I am woooorking");
-      socket.emit(EVENT_LOGIN, { username: "danha", room: "room1" });
-    });
-
-    socket.on(EVENT_UPDATE_USERS, (users: Array<User>) => {
-      this.$store.dispatch("updateUserList", users);
-    });
-  }
-
   get users() {
     return this.$store.getters.users;
   }

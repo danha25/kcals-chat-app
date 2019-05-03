@@ -15,20 +15,18 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue";
 import ChannelList from "./components/ChannelList.vue";
-
-import socketIO from 'socket.io-client';
-
-
+import socketIO from './socket.io/client';
 
 @Component({
   components: {
-    HelloWorld,
     ChannelList
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+
+  socketIO = new socketIO(this);
+}
 </script>
 
 <style>

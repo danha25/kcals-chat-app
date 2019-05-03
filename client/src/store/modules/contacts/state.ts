@@ -1,4 +1,4 @@
-import User from '../../../../node_modules/kcals-common/User';
+import User from '../../../../node_modules/kcals-common/src/User';
 
 const state = {
     channels: new Array<any>(),

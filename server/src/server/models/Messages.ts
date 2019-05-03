@@ -10,6 +10,16 @@ export default class Messages implements IMessage {
 
     constructor() {
         this.messages = new Array();
+        this.messages.push({
+            from: 'a',
+            to: 'b',
+            text: 'aaa',
+            type: MessageType.DIRECT
+        });
+    }
+
+    public getMessages(): Array<Message> {
+        return this.messages;
     }
 
     public getDirectMessages(from: string, to: string): Array<Message> {
