@@ -1,10 +1,15 @@
 <template>
-  <div class="columns is-gapless">
-    <div class="column is-11">
-      <input id="message" class="input" type="text" placeholder="Message">
-    </div>
-    <div class="column">
-      <button id="btn-send" class="button">Send</button>
+  <div class="columns">
+    <div class="column is-12">
+      <input
+        id="message"
+        class="input"
+        type="text"
+        v-model="input"
+        placeholder="Message"
+        autocomplete="off"
+        @keyup.enter="monitorEnterKey"
+      >
     </div>
   </div>
 </template>
@@ -13,11 +18,12 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class InputMessage extends Vue {}
-</script>
+export default class InputMessage extends Vue {
+  input: string = '';
 
-<style>
-.button{
-    width: 100%;
+  monitorEnterKey() {
+    this.$emit('newMessage', this.input);
+    this.input = '';
+  }
 }
-</style>
+</script>

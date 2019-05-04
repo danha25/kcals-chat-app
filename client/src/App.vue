@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    {{user}}
     <div class="container is-fullhd">
       <div class="columns is-gapless">
         <div class="column is-2">
@@ -8,7 +9,7 @@
         <div class="column is-10">
           <div class="flex-container">
             <MessageList class="flex-expand"/>
-            <InputMessage class="flex-fixed"/>
+            <InputMessage class="flex-fixed" @newMessage="newMessage"/>
           </div>
         </div>
       </div>
@@ -23,6 +24,7 @@ import MessageList from "./components/MessageList.vue";
 import InputMessage from "./components/InputMessage.vue";
 
 import socketIO from "./socket.io/client";
+import User from "kcals-common/lib/User";
 
 @Component({
   components: {
@@ -33,6 +35,24 @@ import socketIO from "./socket.io/client";
 })
 export default class App extends Vue {
   socketIO = new socketIO(this);
+
+  newMessage(input: string) {
+    let urlParams = new URLSearchParams(window.location.search);
+    let channelId: string = urlParams.get("channelId") || "";
+    let toUserId: string = urlParams.get("toUserId") || "";
+
+    if (channelId !== "") {
+      this.socketIO.newChannelMessage(this.user.id, channelId, input);
+    } else {
+      this.socketIO.newDirectMessage(this.user.id, toUserId, input);
+    }
+  }
+
+  get user(): User {
+    let urlParams = new URLSearchParams(window.location.search);
+    const username: string = urlParams.get("username") || "";
+    return this.$store.getters.user(username);
+  }
 }
 </script>
 
@@ -42,6 +62,11 @@ export default class App extends Vue {
   height: 100%;
   display: flex;
   flex-direction: column;
+  flex-flow: column nowrap;
+}
+.flex-a {
+  display: flex;
+  flex-flow: column nowrap;
 }
 .flex-expand {
   flex: auto;
