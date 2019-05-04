@@ -1,12 +1,14 @@
 <template>
   <div class="sidebar">
-    <h3>Dirrect Messages</h3>
-    <!-- here v for frineds -->
-    <ChannelListItem user="username"/>
+    <h3>Channels</h3>
+    <div v-for="channel in channels" :key="channel.id">
+      <ChannelListItem :user="channel"/>
+    </div>
 
+    <!-- <h3>Dirrect Messages</h3>
     <div v-for="user in users" :key="user.id">
       <ChannelListItem :user="user"/>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -23,6 +25,9 @@ import ChannelListItem from "./ChannelListItem.vue";
 export default class ChannelList extends Vue {
   get users() {
     return this.$store.getters.users;
+  }
+  get channels() {
+    return this.$store.getters.channels;
   }
 }
 </script>

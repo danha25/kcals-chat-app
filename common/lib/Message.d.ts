@@ -1,7 +1,8 @@
-import MessageType from './MessageType';
 export default interface Message {
-    type: MessageType;
-    to: string;
-    from: string;
-    text: string;
+    id: string;
+    userId: string;
+    toChannelId: string;
+    toUserId: string;
+    toNamespaceId: string;
+    content: string;
 }

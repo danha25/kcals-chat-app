@@ -1,9 +1,20 @@
-import Message from '../../../../node_modules/kcals-common/lib/Message';
+import Message from 'kcals-common/lib/Message';
 
 const getters = {
-    getMessages: (state: any) => {
+    messages: (state: any) => {
         return state.messages
-            //(message: Message) => {message.to === username || message.from === username})
+    },
+    channelMessages: (state: any) => (channelId: string) => {
+        return state.messages.filter((message: Message) => { 
+            return message.toChannelId === channelId
+         });
+    },
+    userMessages: (state: any) => (userId1: string, userId2: string) => {
+        return state.messages.filter((message: Message) => {
+            return ((message.userId === userId1 && message.toUserId === userId2)
+                ||
+                (message.userId === userId2 && message.toUserId === userId1))
+        });
     }
 }
 

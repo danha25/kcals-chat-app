@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as express from 'express';
 import * as http from 'http';
-import SocketIO from './server/socketio';
+import SocketIO from './socketio';
 
 const publicPath = path.join(__dirname, 'public');
 

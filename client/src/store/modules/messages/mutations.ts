@@ -1,5 +1,5 @@
 import * as types from './mutation-types';
-import Message from '../../../../node_modules/kcals-common/lib/Message';
+import Message from 'kcals-common/lib/Message';
 
 const mutations = {
     [types.UPDATE_MESSAGES](state: any, payload: Array<Message>) {

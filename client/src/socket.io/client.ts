@@ -4,6 +4,8 @@ import socketIO from 'socket.io-client';
 import * as EVENT from 'kcals-common/lib/Events';
 import User from 'kcals-common/lib/User';
 import Message from 'kcals-common/lib/Message';
+import Channel from 'kcals-common/lib/Channel';
+import { GET_CHANNELS, GET_USERS } from '../../../common/src/Events';
 
 
 export default class SocketIOClient {
@@ -17,23 +19,25 @@ export default class SocketIOClient {
 
         let urlParams = new URLSearchParams(window.location.search);
         let username: string= urlParams.get('username') || "";
-        let room: string= urlParams.get('room') || "";
 
         this.socket.on("connect", () => {
-            this.socket.emit(EVENT.EVENT_LOGIN, { username, room});
+            this.socket.emit(EVENT.EVENT_LOGIN, username);
         });
 
         this.setListeners();
     }
 
     private setListeners() {
-        this.socket.on(EVENT.EVENT_UPDATE_USERS, (users: Array<User>) => {
-            this.vue.$store.dispatch('updateUserList', users);
+        this.socket.on(EVENT.GET_CHANNELS, (channels: Array<Channel>) => {
+            this.vue.$store.dispatch('updateChannelList', channels);
         });
 
-        this.socket.on(EVENT.EVENT_UPDATE_MESSAGES, (messages: Array<Message>) => {
+        this.socket.on(EVENT.GET_USERS, (users: Array<User>) => {
+             this.vue.$store.dispatch('updateUserList', users);
+        });
+
+        this.socket.on(EVENT.GET_MESSAGES, (messages: Array<Message>) => {
             this.vue.$store.dispatch('updateMessages', messages);
-            console.log(this.vue.$store.getters.getMessages);
-        })
+        });
     }
 }

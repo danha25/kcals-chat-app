@@ -1,4 +1,4 @@
-import Message from '../../../../node_modules/kcals-common/lib/Message';
+import Message from 'kcals-common/lib/Message';
 import * as types from './mutation-types';
 
 const actions = {

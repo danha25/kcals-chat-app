@@ -5,6 +5,9 @@ exports.EVENT_UPDATE_USERS = 'updateUsers';
 exports.EVENT_UPDATE_CHANNELS = 'updateChannels';
 exports.EVENT_UPDATE_MESSAGES = 'updateMessages';
 exports.EVENT_NEW_MESSAGE = 'newMessage';
+exports.GET_CHANNELS = 'getChannels';
+exports.GET_USERS = 'getUsers';
+exports.GET_MESSAGES = 'getMessages';
 // Emit - client
 exports.EVENT_LOGIN = 'login';
 exports.EVENT_LOGOUT = 'disconnect';

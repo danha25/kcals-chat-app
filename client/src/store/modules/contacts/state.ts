@@ -1,7 +1,9 @@
-import User from '../../../../node_modules/kcals-common/src/User';
+import User from 'kcals-common/src/User';
+import Channel from 'kcals-common/src/Channel';
+
 
 const state = {
-    channels: new Array<any>(),
+    channels: new Array<Channel>(),
     users: new Array<User>()
 };
 

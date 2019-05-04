@@ -3,5 +3,7 @@
 export default interface User {
     id: string;
     username: string;
-    room: string;
+    password: string;
+    name: string;
+    email: string;
 }

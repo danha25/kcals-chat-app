@@ -4,6 +4,10 @@ export const EVENT_UPDATE_CHANNELS: string = 'updateChannels';
 export const EVENT_UPDATE_MESSAGES: string = 'updateMessages';
 export const EVENT_NEW_MESSAGE: string = 'newMessage';
 
+export const GET_CHANNELS: string = 'getChannels';
+export const GET_USERS: string = 'getUsers';
+export const GET_MESSAGES: string = 'getMessages';
+
 // Emit - client
 export const EVENT_LOGIN: string = 'login';
 export const EVENT_LOGOUT: string = 'disconnect';

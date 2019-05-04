@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{user.username}}</p>
+    <p>{{user.name}}</p>
   </div>
 </template>
 
@@ -10,6 +10,6 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class ChannelListItem extends Vue {
-  @Prop() private user!: User;
+  @Prop() private user!: any;
 }
 </script>
