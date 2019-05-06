@@ -56,7 +56,8 @@ export default class SocketIOClient {
             toUserId: '',
             toChannelId: channelId,
             toNamespaceId: '1',
-            content: content
+            content: content,
+            timestamp: new Date()
         }
         this.socket.emit(EVENT.EVENT_CHANNEL_MESSAGE, message, () => {
             // confirmation?
@@ -72,7 +73,8 @@ export default class SocketIOClient {
             toUserId: toUserId,
             toChannelId: "",
             toNamespaceId: '1',
-            content: content
+            content: content,
+            timestamp: new Date()
         }
         this.socket.emit(EVENT.EVENT_DIRECT_MESSAGE, message, () => {
             // confirmation?

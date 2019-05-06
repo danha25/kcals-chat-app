@@ -1,14 +1,14 @@
 <template>
   <div class="sidebar">
     <h3>Channels</h3>
-    <div v-for="channel in channels" :key="channel.id">
-      <ChannelListItem :user="channel"/>
+    <div v-for="channel in channels" :key="channel.name">
+      <ChannelListItem :channel="channel"/>
     </div>
 
-    <!-- <h3>Dirrect Messages</h3>
-    <div v-for="user in users" :key="user.id">
-      <ChannelListItem :user="user"/>
-    </div> -->
+    <h3>Dirrect Messages</h3>
+    <div v-for="user in users" :key="user.username">
+      <ChannelListUser :user="user"/>
+    </div>
   </div>
 </template>
 
@@ -16,10 +16,12 @@
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import ChannelListItem from "./ChannelListItem.vue";
+import ChannelListUser from './ChannelListUser.vue';
 
 @Component({
   components: {
-    ChannelListItem
+    ChannelListItem,
+    ChannelListUser
   }
 })
 export default class ChannelList extends Vue {

@@ -13,5 +13,5 @@ exports.EVENT_LOGIN = 'login';
 exports.EVENT_LOGOUT = 'disconnect';
 exports.EVENT_CHANNEL_MESSAGE = 'createChannelMessage';
 exports.EVENT_DIRECT_MESSAGE = 'createDirectMessage';
-exports.EVENT_FETCH_CHANNEL_MESSAGES = 'fetchChannelMessages';
-exports.EVENT_FETCH_DIRECT_MESSAGES = 'fetchDirectMessages';
+//export const EVENT_FETCH_CHANNEL_MESSAGES: string = 'fetchChannelMessages';
+//export const EVENT_FETCH_DIRECT_MESSAGES: string = 'fetchDirectMessages';

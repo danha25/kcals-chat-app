@@ -1,5 +1,5 @@
 <template>
-  <div class>
+  <div class style="max-height:100vh">
     <div v-for="message in messages" :key="message.id">
       <MessageListItem :message="message"/>
     </div>
@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { mapGetters } from "vuex";
+import { Component, Vue, Prop} from "vue-property-decorator";
 import MessageListItem from "./MessageListItem.vue";
+import Message from 'kcals-common/lib/Message';
 
 @Component({
   components: {
@@ -17,24 +17,7 @@ import MessageListItem from "./MessageListItem.vue";
   }
 })
 export default class MessageList extends Vue {
-  get channelId() {
-    let urlParams = new URLSearchParams(window.location.search);
-    let channel: string = urlParams.get("channelId") || "";
-    return channel;
-  }
-  get messages() {
-    let urlParams = new URLSearchParams(window.location.search);
-    let channelId: string = urlParams.get("channelId") || "";
-    let toUserId: string = urlParams.get("toUserId") || "";
-    if (channelId !== "") {
-      return this.$store.getters.channelMessages(this.channelId);
-    } else {
-      const username: string = urlParams.get("username") || "";
-      const user = this.$store.getters.user(username);
-      if(!user) return new Array();
-      return this.$store.getters.userMessages(user.id, toUserId);
-    }
-  }
+  @Prop() messages!: Array<Message>;
 }
 </script>
 

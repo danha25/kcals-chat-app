@@ -14,7 +14,8 @@ export default class Messages implements IMessage {
             toChannelId: undefined,
             toUserId: '2',
             toNamespaceId: '1',
-            content: 'message1'
+            content: 'message1',
+            timestamp: new Date()
         });
         this.messages.push({
             id: '2',
@@ -22,7 +23,8 @@ export default class Messages implements IMessage {
             toChannelId: '1',
             toUserId: undefined,
             toNamespaceId: '1',
-            content: 'message2'
+            content: 'message2',
+            timestamp: new Date()
         });
         this.messages.push({
             id: '3',
@@ -30,7 +32,8 @@ export default class Messages implements IMessage {
             toChannelId: undefined,
             toUserId: '1',
             toNamespaceId: '1',
-            content: 'message3'
+            content: 'message3',
+            timestamp: new Date()
         });
         this.messages.push({
             id: '4',
@@ -38,18 +41,20 @@ export default class Messages implements IMessage {
             toChannelId: '2',
             toUserId: undefined,
             toNamespaceId: '1',
-            content: 'message4'
+            content: 'message4',
+            timestamp: new Date()
         });
     }
 
-    public createMessage(userId: string, toChannelId: string, toUserId: string, namespaceId: string, content: string): Message {
+    public createMessage(userId: string, toChannelId: string, toUserId: string, namespaceId: string, content: string, timestamp: Date): Message {
         const newMessage: Message = {
             id: 'id' + content,
             userId: userId,
             toChannelId: toChannelId,
             toUserId: toUserId,
             toNamespaceId: namespaceId,
-            content: content
+            content: content,
+            timestamp: timestamp
         }
         this.messages.push(newMessage);
         return newMessage;

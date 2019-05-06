@@ -5,4 +5,5 @@ export default interface Message {
     toUserId: string;
     toNamespaceId: string;
     content: string;
+    timestamp: Date;
 }

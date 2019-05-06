@@ -9,14 +9,15 @@ export default class Emmiters{
         this.socket = socket;
     }
 
-    public newChannelMessage(userId: string, channelId: string, content: string): void{
+    public newChannelMessage(userId: string, channelId: string, content: string, timestamp: Date): void{
         const message: Message =  {
             id: 'id'+content,
             userId: userId,
             toUserId: '',
             toChannelId: channelId,
             toNamespaceId: '1',
-            content: content
+            content: content,
+            timestamp: timestamp
         }
         this.socket.emit(EVENT.EVENT_CHANNEL_MESSAGE, message, () => {
             // confirmation?

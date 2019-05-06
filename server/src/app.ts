@@ -20,6 +20,8 @@ class App{
         this.app.use('/libs', express.static(__dirname + '/../node_modules/jquery/dist/'));
         this.app.use('/libs', express.static(__dirname + '/../node_modules/mustache/'));
         this.app.use('/libs', express.static(__dirname + '/../node_modules/bulma/css'));
+
+        // hardcoded user images
     }
 }
 

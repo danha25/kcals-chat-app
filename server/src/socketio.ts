@@ -55,14 +55,14 @@ export default class MySocketIO {
 
             // New Channel Message
             socket.on(EVENT.EVENT_CHANNEL_MESSAGE, (message: Message, callback) => {
-                this.messages.createMessage(message.userId, message.toChannelId, message.toUserId, message.toNamespaceId, message.content);
+                this.messages.createMessage(message.userId, message.toChannelId, message.toUserId, message.toNamespaceId, message.content, message.timestamp);
                 this.io.emit(EVENT.GET_MESSAGES, this.messages.getAllMessages());
                 callback();
             });
 
             // New Direct Message
             socket.on(EVENT.EVENT_DIRECT_MESSAGE, (message: Message, callback) => {
-                this.messages.createMessage(message.userId, message.toChannelId, message.toUserId, message.toNamespaceId, message.content);
+                this.messages.createMessage(message.userId, message.toChannelId, message.toUserId, message.toNamespaceId, message.content, message.timestamp);
                 this.io.emit(EVENT.GET_MESSAGES, this.messages.getAllMessages());
                 callback();
             });

@@ -6,5 +6,6 @@ export default interface Message {
     toChannelId: string,
     toUserId: string,
     toNamespaceId: string,
-    content: string
+    content: string,
+    timestamp: Date
 }

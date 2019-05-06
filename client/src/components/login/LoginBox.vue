@@ -36,10 +36,10 @@ export default class LoginBox extends Vue {
 
   login(evt: Event) {
     evt.preventDefault();
-    localStorage.setItem("namespace", this.namespace);
+    // this needs proper authentication
     localStorage.setItem("username", this.username);
 
-    this.$router.push({ path: `/${this.namespace}` });
+    this.$router.push({ path: `/${this.namespace}/channel/1` });
   }
 }
 </script>

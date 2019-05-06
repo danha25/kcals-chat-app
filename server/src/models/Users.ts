@@ -13,7 +13,8 @@ export default class Users implements IUsers {
             username: 'username1',
             password: 'password1',
             name: 'First Last',
-            email: 'name@email.com'
+            email: 'name@email.com',
+            photoUrl: 'http://localhost:3000/img/user1.png'
         });
 
         this.users.push({
@@ -21,7 +22,8 @@ export default class Users implements IUsers {
             username: 'username2',
             password: 'password2',
             name: 'name2',
-            email: 'email2'
+            email: 'email2',
+            photoUrl: 'http://localhost:3000/img/user2.png'
         });
 
         this.users.push({
@@ -29,17 +31,19 @@ export default class Users implements IUsers {
             username: 'username3',
             password: 'password3',
             name: 'name3',
-            email: 'email3'
+            email: 'email3',
+            photoUrl: 'http://localhost:3000/img/user1.png'
         });
     }
 
-    public createUser(username: string, password: string, name: string, email: string): User {
+    public createUser(username: string, password: string, name: string, email: string, photoUrl: string): User {
         const user: User = {
             id: 'id' + username,
             username: username,
             password: password,
             name: name, 
             email: email,
+            photoUrl: photoUrl
         };
         this.users.push(user);
         return user;
