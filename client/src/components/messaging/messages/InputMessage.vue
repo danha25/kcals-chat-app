@@ -21,7 +21,8 @@ import { Component, Vue } from "vue-property-decorator";
 export default class InputMessage extends Vue {
   input: string = '';
 
-  monitorEnterKey() {
+  monitorEnterKey(evt: Event) {
+    evt.preventDefault();
     this.$emit('newMessage', this.input);
     this.input = '';
   }
