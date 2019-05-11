@@ -33,9 +33,9 @@ const DIRECT_MESSAGE: string = "direct";
   }
 })
 export default class Messaging extends Vue {
-  @Prop() namespace!: string;
+  @Prop() namespace!: number;
   @Prop() type!: string; //channels or messages
-  @Prop() id!: string;
+  @Prop() id!: number;
 
   private socketIO = new socketIO(this);
 

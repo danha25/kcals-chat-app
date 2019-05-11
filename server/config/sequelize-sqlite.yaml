@@ -1,0 +1,6 @@
+dbname: kcals 
+username: 
+password: 
+params: 
+    dialect: sqlite 
+    storage: data/kcals.sqlite3 

@@ -8,7 +8,6 @@ const actions = {
     },
 
     addMessage({commit}: {commit: any}, message: Message){
-        // emit new message event
         commit(types.ADD_MESSAGE, message);
     }
 }

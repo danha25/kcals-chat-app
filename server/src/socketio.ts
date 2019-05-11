@@ -1,71 +1,87 @@
 import * as http from 'http';
 import * as socketIO from 'socket.io'
 
-
+import * as EVENT from 'kcals-common/lib/Events';
+import Namespace from 'kcals-common/lib/Namespace';
 import User from 'kcals-common/lib/User';
 import Channel from 'kcals-common/lib/Channel';
-import * as EVENT from 'kcals-common/lib/Events';
-import Users from './models/Users';
-import Messages from './models/Messages';
-import Channels from './models/Channels';
-import NamespaceUsers from './models/Namespaces_Users';
 import Message from 'kcals-common/lib/Message';
+
+import DAO from './db';
 
 export default class MySocketIO {
 
     public io: socketIO.Server;
-    private users: Users;
-    private channels: Channels;
-    private namespaceUsers: NamespaceUsers;
-    private messages: Messages;
+    private dao: DAO;
 
-    // for now default namespace is '1'
-    private DEF_NAMESPACE: string = '1';
-
-    constructor(server: http.Server) {
+    constructor(server: http.Server, dao: DAO) {
         this.io = socketIO(server);
-        this.users = new Users();
-        this.channels = new Channels();
-        this.namespaceUsers = new NamespaceUsers();
-        this.messages = new Messages();
+        this.dao = dao;
 
         this.io.on('connection', (socket) => {
             // login
-            socket.on(EVENT.EVENT_LOGIN, (username: string) => {
-                // get user data
-                const user: User = this.users.getUser(username);
+            socket.on(EVENT.EVENT_LOGIN, async (params: any, callback) => {
 
-                // send him channels
-                const channels: Array<Channel> = this.channels.getChannels(this.DEF_NAMESPACE);
+                const user: User = await this.dao.getUserByName(params.username);
+                const namespace: Namespace = await this.dao.getNamespaceByName(params.namespaceName);
+
+                // send channels
+                const channels: Array<Channel> = await this.dao.getChannels(namespace.id);
                 socket.emit(EVENT.GET_CHANNELS, channels);
 
-                // send him users
-                const usersIds: Array<String> = this.namespaceUsers.getUsersIds(this.DEF_NAMESPACE);
-                const users = usersIds.map((userId: string) => this.users.getUserById(userId));
+                // send users
+                const users: Array<User> = await this.dao.getUsers(namespace.id);
                 socket.emit(EVENT.GET_USERS, users);
 
-                // send him all messages
-                socket.emit(EVENT.GET_MESSAGES, this.messages.getAllMessages());
+                // send user specific namespace messages
+                let messages: Array<Message> = await this.getNamespaceMessages(namespace.id, user.id, channels, users);
+                socket.emit(EVENT.GET_MESSAGES, messages);
+
+                callback(namespace);
             });
 
-            // logout
-            // socket.on(EVENT.EVENT_LOGOUT, (params: any) => {
-            //     this.userDisconnected(socket)
-            // });
-
             // New Channel Message
-            socket.on(EVENT.EVENT_CHANNEL_MESSAGE, (message: Message, callback) => {
-                this.messages.createMessage(message.userId, message.toChannelId, message.toUserId, message.toNamespaceId, message.content, message.timestamp);
-                this.io.emit(EVENT.GET_MESSAGES, this.messages.getAllMessages());
+            socket.on(EVENT.EVENT_CHANNEL_MESSAGE, async (params: any, callback) => {
+                await this.dao.createMessage(params.message, params.namespaceId, params.message.toChannelIdCopy, null)
+                // Temporary - send to everyone
+                const channels: Array<Channel> = await this.dao.getChannels(params.namespaceId);
+                const users: Array<User> = await this.dao.getUsers(params.namespaceId);
+                let messages: Array<Message> = await this.getNamespaceMessages(params.namespaceId, 1, channels, users);
+
+                this.io.emit(EVENT.GET_MESSAGES, messages);
                 callback();
             });
 
             // New Direct Message
-            socket.on(EVENT.EVENT_DIRECT_MESSAGE, (message: Message, callback) => {
-                this.messages.createMessage(message.userId, message.toChannelId, message.toUserId, message.toNamespaceId, message.content, message.timestamp);
-                this.io.emit(EVENT.GET_MESSAGES, this.messages.getAllMessages());
+            socket.on(EVENT.EVENT_DIRECT_MESSAGE, async (params: any, callback) => {
+                await this.dao.createMessage(params.message, params.namespaceId, null, params.message.toUserIdCopy);
+                // Temporary - send to everyone
+                const channels: Array<Channel> = await this.dao.getChannels(params.namespaceId);
+                const users: Array<User> = await this.dao.getUsers(params.namespaceId);
+                let messages: Array<Message> = await this.getNamespaceMessages(params.namespaceId, 1, channels, users);
+
+                this.io.emit(EVENT.GET_MESSAGES, messages);
                 callback();
             });
         });
     }
+
+    private asyncForEach = async (array: Array<any>, callback: any) => {
+        for (let index = 0; index < array.length; index++) {
+            await callback(array[index], index, array)
+        }
+    }
+    // Namespace users's specific messages 
+    private getNamespaceMessages = async (namespaceId: number, userId: number, channels: Array<Channel>, users: Array<User>):Promise<Array<Message>> => {
+        let messages: Array<Message> = new Array<Message>();
+        await this.asyncForEach(channels, async (channel: Channel) => {
+            let channelMessages = await this.dao.getChannelMessages(channel.id);
+            messages = messages.concat(channelMessages); 
+        });
+        await this.asyncForEach(users, async (user: User) => {
+            let userMessages = await this.dao.getUsersMessages(userId, user.id);
+            messages = messages.concat(userMessages); 
+        });
+        return messages;
+      }
 }

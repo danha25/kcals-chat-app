@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="'/namespace/channel/' + channel.id" class="channel-item"># {{ channel.name}}</router-link>
+    <router-link :to="'/namespace1/channel/' + channel.id" class="channel-item"># {{ channel.name}}</router-link>
   </div>
 </template>
 

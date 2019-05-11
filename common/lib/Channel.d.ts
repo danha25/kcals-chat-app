@@ -1,5 +1,4 @@
 export default interface Channel {
-    id: string;
-    namespaceId: string;
+    id?: number;
     name: string;
 }

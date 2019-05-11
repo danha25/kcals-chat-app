@@ -1,31 +1,29 @@
-import { EVENT_DIRECT_MESSAGE } from './../../../common/src/Events';
 import { Vue } from "vue-property-decorator";
 import * as socketIO from 'socket.io-client';
 
 import * as EVENT from 'kcals-common/lib/Events';
+import Namespace from 'kcals-common/lib/Namespace';
 import User from 'kcals-common/lib/User';
 import Message from 'kcals-common/lib/Message';
 import Channel from 'kcals-common/lib/Channel';
-import Emmiters from './emitters';
 
 export default class SocketIOClient {
     private url: string = process.env.SOCKET_IO_URL || 'http://localhost:3000';
     private socket: any;
     private vue: Vue;
 
-    private emitters: Emmiters;
-
     constructor(vue: Vue) {
         this.vue = vue;
         this.socket = socketIO.connect(this.url);
 
-        this.emitters = new Emmiters(this.socket);
-
-        let urlParams = new URLSearchParams(window.location.search);
-        let username: string= urlParams.get('username') || "";
+        const username: string = localStorage.getItem('username') || '';
+        const namespace: string = localStorage.getItem('namespace') || '';
 
         this.socket.on("connect", () => {
-            this.socket.emit(EVENT.EVENT_LOGIN, username);
+            this.socket.emit(EVENT.EVENT_LOGIN, { username: username, namespaceName: namespace }, (namespace: Namespace) => {
+                const namespaceId = new Number(namespace.id);
+                localStorage.setItem('namespaceId', namespaceId.toString());
+            });
         });
 
         this.setListeners();
@@ -37,7 +35,7 @@ export default class SocketIOClient {
         });
 
         this.socket.on(EVENT.GET_USERS, (users: Array<User>) => {
-             this.vue.$store.dispatch('updateUserList', users);
+            this.vue.$store.dispatch('updateUserList', users);
         });
 
         this.socket.on(EVENT.GET_MESSAGES, (messages: Array<Message>) => {
@@ -45,38 +43,28 @@ export default class SocketIOClient {
         });
     }
 
-    public getEmitters(): Emmiters {
-        return this.emitters;
-    }
-
-    public newChannelMessage(userId: string, channelId: string, content: string): void{
-        const message: Message =  {
-            id: 'id'+content,
+    public newChannelMessage(userId: number, channelId: number, content: string): void {
+        const namespaceId = localStorage.getItem('namespaceId');
+        const message: Message = {
             userId: userId,
-            toUserId: '',
-            toChannelId: channelId,
-            toNamespaceId: '1',
+            toChannelIdCopy: channelId,
             content: content,
-            timestamp: new Date()
         }
-        this.socket.emit(EVENT.EVENT_CHANNEL_MESSAGE, message, () => {
+        this.socket.emit(EVENT.EVENT_CHANNEL_MESSAGE, { message: message, namespaceId: namespaceId }, () => {
             // confirmation?
         });
     }
 
 
 
-    public newDirectMessage(userId: string, toUserId: string, content: string): void{
-        const message: Message =  {
-            id: 'id'+content,
+    public newDirectMessage(userId: number, toUserId: number, content: string): void {
+        const namespaceId = localStorage.getItem('namespaceId');
+        const message: Message = {
             userId: userId,
-            toUserId: toUserId,
-            toChannelId: "",
-            toNamespaceId: '1',
+            toUserIdCopy: toUserId,
             content: content,
-            timestamp: new Date()
         }
-        this.socket.emit(EVENT.EVENT_DIRECT_MESSAGE, message, () => {
+        this.socket.emit(EVENT.EVENT_DIRECT_MESSAGE, { message: message, namespaceId: namespaceId }, () => {
             // confirmation?
         });
     }

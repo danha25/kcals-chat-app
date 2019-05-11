@@ -2,9 +2,8 @@
   "name": "kcals-common",
   "version": "1.0.0",
   "description": "Common models for kcals application",
-  "main": "index.ts",
   "scripts": {
-    "build" : "tsc"
+    "build": "tsc"
   },
   "author": "danha",
   "license": "ISC",

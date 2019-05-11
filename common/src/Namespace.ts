@@ -1,6 +1,6 @@
 'use strict'
 
 export default interface Namespace {
-    id: string;
+    id?: number;
     name: string
 }

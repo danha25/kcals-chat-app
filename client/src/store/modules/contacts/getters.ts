@@ -5,7 +5,7 @@ const getters = {
     user: (state: any) => (username: string) => {
         return state.users.filter((user: User) => user.username === username)[0];
     },
-    userById: (state: any) => (id: string) => {
+    userById: (state: any) => (id: number) => {
         return state.users.filter((user: User) => user.id === id)[0];
     },
     channels: (state:any) => state.channels

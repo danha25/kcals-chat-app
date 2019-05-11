@@ -2,7 +2,7 @@
   <article class="media">
   <figure class="media-left">
     <p class="image is-32x32">
-      <img :src="sender.photoUrl" class="avatar" />
+      <img :src='avatarUrl' class="avatar" />
     </p>
   </figure>
   <div class="media-content">
@@ -19,6 +19,7 @@
 
 <script lang="ts">
 import Message from 'kcals-common/lib/Message';
+import User from 'kcals-common/lib/User';
 import moment from 'moment';
 import { Component, Prop, Vue } from "vue-property-decorator";
 
@@ -26,11 +27,14 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 export default class MessageListItem extends Vue {
   @Prop() private message!: Message;
 
-  get sender(): string {
+  get sender(): User {
     return this.$store.getters.userById(this.message.userId);
   }
   get formattedDate(): string {
-    return moment(this.message.timestamp.valueOf()).format('h:mm a');
+    return moment(this.message.createdAt.valueOf()).format('h:mm a');
+  }
+  get avatarUrl(): string{
+    return 'http://localhost:3000' + '/' + this.sender.avatarUrl;
   }
 }
 </script>

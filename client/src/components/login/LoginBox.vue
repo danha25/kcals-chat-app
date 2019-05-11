@@ -38,6 +38,7 @@ export default class LoginBox extends Vue {
     evt.preventDefault();
     // this needs proper authentication
     localStorage.setItem("username", this.username);
+    localStorage.setItem("namespace", this.namespace);
 
     this.$router.push({ path: `/${this.namespace}/channel/1` });
   }

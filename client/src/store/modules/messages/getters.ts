@@ -4,16 +4,16 @@ const getters = {
     messages: (state: any) => {
         return state.messages
     },
-    channelMessages: (state: any) => (channelId: string) => {
-        return state.messages.filter((message: Message) => { 
-            return message.toChannelId === channelId
-         });
-    },
-    userMessages: (state: any) => (userId1: string, userId2: string) => {
+    channelMessages: (state: any) => (channelId: number) => {
         return state.messages.filter((message: Message) => {
-            return ((message.userId === userId1 && message.toUserId === userId2)
+            return message.toChannelIdCopy == channelId;
+        });
+    },
+    userMessages: (state: any) => (userId1: number, userId2: number) => {
+        return state.messages.filter((message: Message) => {
+            return ((message.userId == userId1 && message.toUserIdCopy == userId2)
                 ||
-                (message.userId === userId2 && message.toUserId === userId1))
+                (message.userId == userId2 && message.toUserIdCopy == userId1))
         });
     }
 }

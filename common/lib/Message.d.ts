@@ -1,9 +1,8 @@
 export default interface Message {
-    id: string;
-    userId: string;
-    toChannelId: string;
-    toUserId: string;
-    toNamespaceId: string;
+    id?: number;
+    userId?: number;
+    toChannelIdCopy?: number;
+    toUserIdCopy?: number;
     content: string;
-    timestamp: Date;
+    createdAt?: Date;
 }
