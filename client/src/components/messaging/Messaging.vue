@@ -1,5 +1,6 @@
 <template>
   <div class="columns is-gapless full-height">
+    <button class="button" @click="logout">Logout</button>
     <div class="column is-2">
       <ChannelList/>
     </div>
@@ -53,6 +54,10 @@ export default class Messaging extends Vue {
     } else if (this.type === DIRECT_MESSAGE) {
       this.socketIO.newDirectMessage(this.user.id, this.id, input);
     }
+  }
+
+  logout() {
+    this.socketIO.logout();
   }
 
   get user(): User {

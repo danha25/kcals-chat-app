@@ -7,4 +7,5 @@ export default interface User {
     name: string;
     email: string;
     avatarUrl: string;
+    online?: boolean;
 }

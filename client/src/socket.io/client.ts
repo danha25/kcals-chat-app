@@ -69,4 +69,10 @@ export default class SocketIOClient {
         });
     }
 
+    public logout(): void {
+        const username = localStorage.getItem('username');
+        const namespace = localStorage.getItem('namespace');
+        this.socket.emit(EVENT.EVENT_LOGOUT, { username: username, namespace:namespace});
+    }
+
 }

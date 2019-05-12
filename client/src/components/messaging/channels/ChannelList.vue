@@ -6,7 +6,7 @@
     </div>
 
     <h3>Dirrect Messages</h3>
-    <div v-for="user in users" :key="user.username">
+    <div v-for="user in users" :key="user.id">
       <ChannelListUser :user="user"/>
     </div>
   </div>

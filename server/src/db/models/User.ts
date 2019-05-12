@@ -51,6 +51,11 @@ export const UserFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize
         avatarUrl: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        online: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         }
     };
     const User = sequelize.define<UserInstance, UserAttributes>('User', attributes);

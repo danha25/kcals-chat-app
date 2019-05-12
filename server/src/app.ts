@@ -27,9 +27,9 @@ class App {
         const params = jsyaml.safeLoad(sequelizeConfig);
         this.dao = new DAO(params);
 
-        if (process.env.NODE_ENV == 'dev') {
-            seedData(this.dao);
-        }
+        // if (process.env.NODE_ENV == 'dev') {
+        //     seedData(this.dao);
+        // }
 
         this.io = new SocketIO(this.server, this.dao);
     }

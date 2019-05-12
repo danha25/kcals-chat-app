@@ -7,6 +7,6 @@ exports.GET_MESSAGES = 'getMessages';
 exports.EVENT_NEW_MESSAGE = 'newMessage';
 // Emit - client
 exports.EVENT_LOGIN = 'login';
-exports.EVENT_LOGOUT = 'disconnect';
+exports.EVENT_LOGOUT = 'logout';
 exports.EVENT_CHANNEL_MESSAGE = 'createChannelMessage';
 exports.EVENT_DIRECT_MESSAGE = 'createDirectMessage';

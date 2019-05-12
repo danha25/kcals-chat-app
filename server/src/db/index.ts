@@ -74,15 +74,19 @@ export default class DAO {
         return users;
     }
 
+    public async setUserOnline(userId: number, online: boolean) {
+        let user = await this.db.User.findById(userId);
+        user.online = online;
+        await user.save();
+    }
+
     public async createMessage(message: Message, namespaceId: number, toChannelId: number, toUserId: number): Promise<Message> {
         let newMessage = await this.db.Message.create(message);
-        console.log('habaahaha' + newMessage);
         newMessage = await newMessage.update({
             namespaceId: namespaceId,
             toChannelId: toChannelId,
             toUserId: toUserId
         });
-        console.log('koko' + newMessage);
         return { id: newMessage.id, userId: newMessage.userId, content: newMessage.content }
     }
 
